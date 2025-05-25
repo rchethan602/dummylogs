@@ -1,5 +1,5 @@
 name: Test project
-on: push
+on: [push, workflow_dispatch] #or mention only "push"
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,6 +16,7 @@ jobs:
       - name: Run tests
         run : npm test
   deploy:
+    needs: test  #or can also add like this if job depends on multiple other jobs [test,build]
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
